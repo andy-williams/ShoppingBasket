@@ -25,14 +25,14 @@ namespace ShoppingBasket
         private IList<LineItem> GetFreeMilkOffer(IList<LineItem> items)
         {
             var discounts = new List<LineItem>();
+            var milk = _inventory.GetItem("milk");
 
-            var milkCount = items.Count(x => x.Name == "Milk");
+            var milkCount = items.Count(x => x.Sku == milk.Sku);
             var freeMilkAvailable = milkCount > 0 ? milkCount / 4 : 0;
 
-            var milkPrice = _inventory.GetItem("milk").Price;
             for (var i = 0; i < freeMilkAvailable; i++)
             {
-                discounts.Add(new LineItem("4xButter - 1 FREE", -(milkPrice)));
+                discounts.Add(new LineItem("4xmilk-1free", "4xButter - 1 FREE", -(milk.Price)));
             }
 
             return discounts;
@@ -41,19 +41,20 @@ namespace ShoppingBasket
         private IList<LineItem> GetBreadDiscounts(IList<LineItem> items)
         {
             var discounts = new List<LineItem>();
+            var butter = _inventory.GetItem("butter");
+            var bread = _inventory.GetItem("bread");
 
-            var butterCount = items.Count(x => x.Name == "Butter");
+            var butterCount = items.Count(x => x.Sku == butter.Sku);
             var breadDiscountsAvailable = butterCount > 0 ? butterCount / 2 : 0;
-            var breadCount = items.Count(x => x.Name == "Bread");
+            var breadCount = items.Count(x => x.Sku == bread.Sku);
 
             var breadDiscountCount = breadCount > breadDiscountsAvailable
                 ? breadDiscountsAvailable
                 : breadCount;
 
-            var breadPrice = _inventory.GetItem("bread").Price;
             for (var i = 0; i < breadDiscountCount; i++)
             {
-                discounts.Add(new LineItem("2xButter - Bread 50% Off", -(breadPrice * 0.5m)));
+                discounts.Add(new LineItem("2xbread-butter50%", "2xButter - Bread 50% Off", -(bread.Price * 0.5m)));
             }
 
             return discounts;

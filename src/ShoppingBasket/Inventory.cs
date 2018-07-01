@@ -6,9 +6,9 @@ namespace ShoppingBasket
     {
         private readonly IDictionary<string, LineItem> _inventory = new Dictionary<string, LineItem>
         {
-            { "butter", new LineItem("Butter", 0.80m) },
-            { "milk", new LineItem("Milk", 1.15m) },
-            { "bread", new LineItem("Bread", 1.00m) }
+            { "butter", new LineItem("butter", "Butter", 0.80m) },
+            { "milk", new LineItem("milk", "Milk", 1.15m) },
+            { "bread", new LineItem("bread", "Bread", 1.00m) }
         };
 
         public LineItem GetItem(string sku)
