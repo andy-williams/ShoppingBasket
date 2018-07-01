@@ -30,6 +30,15 @@ namespace ShoppingBasket.Test
                 .BDDfy();
         }
 
+        [Fact]
+        public void It_GetsTotal_WithDiscountOnButter()
+        {
+            this.Given(x => x.BasketHas(2).Butter())
+                .And(x => x.BasketHas(2).Bread())
+                .Then(x => x.ItGetsTotalOf(3.10m))
+                .BDDfy();
+        }
+
         private void ItGetsTotalOf(decimal total)
         {
             Assert.Equal(total, _shoppingBasket.GetTotal());
