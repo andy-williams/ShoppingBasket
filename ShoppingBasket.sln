@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingBasket", "src\ShoppingBasket\ShoppingBasket.csproj", "{3C2CBEF2-4918-47DA-B464-19DD2117E5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingBasket", "src\ShoppingBasket\ShoppingBasket.csproj", "{3C2CBEF2-4918-47DA-B464-19DD2117E5FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingBasket.Test", "tests\ShoppingBasket.Test\ShoppingBasket.Test.csproj", "{CCE7BB82-3D69-4829-B2E5-08C435E09B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingBasket.Test", "tests\ShoppingBasket.Test\ShoppingBasket.Test.csproj", "{CCE7BB82-3D69-4829-B2E5-08C435E09B63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4BDDC496-EC0B-41E7-B42F-DC0367A9332C}"
 EndProject

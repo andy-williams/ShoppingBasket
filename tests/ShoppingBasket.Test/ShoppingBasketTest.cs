@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TestStack.BDDfy;
 using Xunit;
 
@@ -9,13 +10,21 @@ namespace ShoppingBasket.Test
 
         public ShoppingBasketTest()
         {
-            _shoppingBasket = new ShoppingBasket();
+            var inventory = new Dictionary<string, LineItem>
+            {
+                { "butter", new LineItem { Name = "Butter", Price = 0.80m }},
+                { "milk", new LineItem { Name = "Milk", Price = 1.15m }},
+                { "bread", new LineItem { Name = "Bread", Price = 1.00m }}
+            };
+
+            _shoppingBasket = new ShoppingBasket(inventory);
         }
 
         [Fact]
         public void It_GetsTotal()
         {
             this.Given(x => x.BasketHas(1).Bread())
+                .Given(x => x.BasketHas(1).Butter())
                 .And(x => x.BasketHas(1).Milk())
                 .Then(x => x.ItGetsTotalOf(2.95m))
                 .BDDfy();
@@ -23,7 +32,7 @@ namespace ShoppingBasket.Test
 
         private void ItGetsTotalOf(decimal total)
         {
-            Assert.Equal(_shoppingBasket.GetTotal(), total);
+            Assert.Equal(total, _shoppingBasket.GetTotal());
         }
 
         private FluentBasketItemsBuilder BasketHas(int numberOfItems)
