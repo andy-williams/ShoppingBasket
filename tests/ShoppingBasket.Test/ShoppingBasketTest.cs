@@ -12,12 +12,12 @@ namespace ShoppingBasket.Test
         {
             var inventory = new Dictionary<string, LineItem>
             {
-                { "butter", new LineItem { Name = "Butter", Price = 0.80m }},
-                { "milk", new LineItem { Name = "Milk", Price = 1.15m }},
-                { "bread", new LineItem { Name = "Bread", Price = 1.00m }}
+                { "butter", new LineItem("Butter", 0.80m) },
+                { "milk", new LineItem("Milk", 1.15m) },
+                { "bread", new LineItem("Bread", 1.00m) }
             };
 
-            _shoppingBasket = new ShoppingBasket(inventory);
+            _shoppingBasket = new ShoppingBasket(inventory, new DiscountService());
         }
 
         [Fact]

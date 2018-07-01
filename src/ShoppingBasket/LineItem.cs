@@ -2,7 +2,13 @@
 {
     public class LineItem
     {
-        public decimal Price { get; set; }
-        public string Name { get; set; }
+        public LineItem(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+
+        public decimal Price { get; }
+        public string Name { get; }
     }
 }

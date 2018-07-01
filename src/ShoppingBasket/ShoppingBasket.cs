@@ -6,12 +6,14 @@ namespace ShoppingBasket
     public class ShoppingBasket : IShoppingBasket
     {
         private readonly IDictionary<string, LineItem> _inventory;
+        private readonly IDiscountService _discountService;
 
         private readonly IList<LineItem> _basket = new List<LineItem>();
 
-        public ShoppingBasket(IDictionary<string, LineItem> inventory)
+        public ShoppingBasket(IDictionary<string, LineItem> inventory, IDiscountService discountService)
         {
             _inventory = inventory;
+            _discountService = discountService;
         }
 
         public void AddItem(string sku, int quantity = 1)
@@ -25,7 +27,11 @@ namespace ShoppingBasket
 
         public decimal GetTotal()
         {
-            return _basket.Select(x => x.Price).Sum();
+            var discountItems = _discountService.GetDiscountItems(_basket);
+            var basketTotal = _basket.Select(x => x.Price).Sum();
+            var discountTotal = discountItems.Select(x => x.Price).Sum();
+
+            return basketTotal + discountTotal;
         }
     }
 
