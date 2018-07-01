@@ -6,6 +6,13 @@ namespace ShoppingBasket
 {
     public class DiscountService : IDiscountService
     {
+        private readonly IInventory _inventory;
+
+        public DiscountService(IInventory inventory)
+        {
+            _inventory = inventory;
+        }
+        
         public IList<LineItem> GetDiscountItems(IList<LineItem> items)
         {
             var discounts = new List<LineItem>();
@@ -22,10 +29,10 @@ namespace ShoppingBasket
             var milkCount = items.Count(x => x.Name == "Milk");
             var freeMilkAvailable = milkCount > 0 ? milkCount / 4 : 0;
 
-            var milkPrice = items.FirstOrDefault(x => x.Name == "Milk")?.Price;
+            var milkPrice = _inventory.GetItem("milk").Price;
             for (var i = 0; i < freeMilkAvailable; i++)
             {
-                discounts.Add(new LineItem("4xButter - 1 FREE", -(milkPrice.Value)));
+                discounts.Add(new LineItem("4xButter - 1 FREE", -(milkPrice)));
             }
 
             return discounts;
@@ -43,10 +50,10 @@ namespace ShoppingBasket
                 ? breadDiscountsAvailable
                 : breadCount;
 
-            var breadPrice = items.FirstOrDefault(x => x.Name == "Bread")?.Price;
+            var breadPrice = _inventory.GetItem("bread").Price;
             for (var i = 0; i < breadDiscountCount; i++)
             {
-                discounts.Add(new LineItem("2xButter - Bread 50% Off", -(breadPrice.Value * 0.5m)));
+                discounts.Add(new LineItem("2xButter - Bread 50% Off", -(breadPrice * 0.5m)));
             }
 
             return discounts;

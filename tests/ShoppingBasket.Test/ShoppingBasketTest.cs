@@ -10,14 +10,9 @@ namespace ShoppingBasket.Test
 
         public ShoppingBasketTest()
         {
-            var inventory = new Dictionary<string, LineItem>
-            {
-                { "butter", new LineItem("Butter", 0.80m) },
-                { "milk", new LineItem("Milk", 1.15m) },
-                { "bread", new LineItem("Bread", 1.00m) }
-            };
-
-            _shoppingBasket = new ShoppingBasket(inventory, new DiscountService());
+            var inventory = new Inventory();
+            
+            _shoppingBasket = new ShoppingBasket(inventory, new DiscountService(inventory));
         }
 
         [Fact]
