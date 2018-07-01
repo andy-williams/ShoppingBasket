@@ -31,7 +31,7 @@ namespace ShoppingBasket
 
             for (var i = 0; i < freeMilkAvailable; i++)
             {
-                discounts.Add(new LineItem("4xmilk-1free", "4xButter - 1 FREE", -(milk.Price)));
+                discounts.Add(new LineItem("4xmilk-1free", "4xMilk - 1 FREE", -(milk.Price)));
             }
 
             return discounts;
